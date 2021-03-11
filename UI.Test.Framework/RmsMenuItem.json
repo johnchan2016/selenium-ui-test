@@ -1,0 +1,409 @@
+{
+  "RmsMenuItem": [
+    {
+      "ID": -1,
+      "Name": "Dashboard",
+      "Role": []
+    },
+    {
+      "ID": 0,
+      "Name": "Personnel",
+      "Role": []
+    },
+    {
+      "ID": 1,
+      "Name": "School",
+      "Role": [ "A", "C", "D", "F", "G", "I", "K" ]
+    },
+    {
+      "ID": 2,
+      "Name": "BoxOffice",
+      "Role": [ "A", "B", "E", "F", "G", "I", "H", "L" ]
+    },
+    {
+      "ID": 3,
+      "Name": "PeriodicProcess",
+      "Role": [ "A", "C", "D", "E", "F", "G", "I" ]
+    },
+    {
+      "ID": 4,
+      "Name": "Retail",
+      "Role": []
+    },
+    {
+      "ID": 5,
+      "Name": "BoxOfficePos",
+      "ParentID": 2,
+      "Role": [ "A", "B", "E", "F", "G", "H", "J" ]
+    },
+    {
+      "ID": 6,
+      "Name": "Finance",
+      "Role": []
+    },
+    {
+      "ID": 7,
+      "Name": "Loyalty",
+      "Role": [ "A", "B", "E", "F", "G", "H" ]
+    },
+    {
+      "ID": 8,
+      "Name": "Admin",
+      "Role": [ "A", "B", "C", "D", "E", "F", "G", "H", "I" ]
+    },
+    {
+      "ID": 9,
+      "Name": "Logout",
+      "Role": []
+    },
+    {
+      "ID": 10,
+      "Name": "TicketMaster",
+      "ParentID": 2,
+      "Role": [ "A", "F", "G", "J" ]
+    },
+    {
+      "ID": 11,
+      "Name": "BoxOfficeDayEnd",
+      "ParentID": 3,
+      "Role": [ "A", "E", "G" ]
+    },
+    {
+      "ID": 15,
+      "Name": "BoxOfficeOtherIncome",
+      "ParentID": 5,
+      "Role": [ "A", "B", "E", "F", "G", "H" ]
+    },
+    {
+      "ID": 18,
+      "Name": "StartCashierSession",
+      "ParentID": 3,
+      "Role": []
+    },
+    {
+      "ID": 19,
+      "Name": "CustomerMaintenance",
+      "ParentID": 7,
+      "Role": [ "A", "B", "E", "F", "G", "H" ]
+    },
+    {
+      "ID": 20,
+      "Name": "BonusPointMaintenance",
+      "ParentID": 7,
+      "Role": [ "A", "F", "G" ]
+    },
+    {
+      "ID": 21,
+      "Name": "GiftMaintenance",
+      "ParentID": 7,
+      "Role": [ "A", "B", "E", "F", "G", "H" ]
+    },
+    {
+      "ID": 23,
+      "Name": "BoxOfficeEndCashierSession",
+      "ParentID": 3,
+      "Role": [ "A", "E", "F", "G", "H" ]
+    },
+    {
+      "ID": 24,
+      "Name": "TicketSales",
+      "ParentID": 5,
+      "Role": []
+    },
+    {
+      "ID": 25,
+      "Name": "CustomerDetail",
+      "ParentID": 19,
+      "Role": [ "A", "B", "E", "F", "G", "H" ]
+    },
+    {
+      "ID": 26,
+      "Name": "TicketDetail",
+      "ParentID": 10,
+      "Role": [ "A", "G", "J" ]
+    },
+    {
+      "ID": 27,
+      "Name": "StaffMaintenance",
+      "ParentID": 0,
+      "Role": [ "A", "F", "G", "I" ]
+    },
+    {
+      "ID": 28,
+      "Name": "StaffDetail",
+      "ParentID": 27,
+      "Role": [ "A", "F", "G", "I" ]
+    },
+    {
+      "ID": 29,
+      "Name": "NewStaff",
+      "ParentID": 27,
+      "Role": [ "A", "F", "G", "I" ]
+    },
+    {
+      "ID": 30,
+      "Name": "ActivateStaffCard",
+      "ParentID": 0,
+      "Role": [ "K" ],
+      "Not": true
+    },
+    {
+      "ID": 31,
+      "Name": "Coach",
+      "ParentID": 0,
+      "Role": [ "A", "F", "G", "I" ]
+    },
+    {
+      "ID": 32,
+      "Name": "CoachDetail",
+      "ParentID": 31,
+      "Role": [ "A", "F", "G", "I" ]
+    },
+    {
+      "ID": 33,
+      "Name": "Skill",
+      "ParentID": 0,
+      "Role": [ "A", "F", "G", "I" ]
+    },
+    {
+      "ID": 34,
+      "Name": "ClassMaintenance",
+      "ParentID": 1,
+      "Role": [ "A", "C", "D", "F", "G", "I" ]
+    },
+    {
+      "ID": 35,
+      "Name": "RinkSchedule",
+      "ParentID": 1,
+      "Role": [ "A", "F", "G", "I" ]
+    },
+    {
+      "ID": 36,
+      "Name": "ClassDetail",
+      "ParentID": 34,
+      "Role": [ "A", "C", "D", "F", "G", "I" ]
+    },
+    {
+      "ID": 37,
+      "Name": "MasterMaintenance",
+      "ParentID": 1,
+      "Role": [ "A", "F", "G", "I" ]
+    },
+    {
+      "ID": 38,
+      "Name": "CoachScheduler",
+      "ParentID": 1,
+      "Role": [ "A", "C", "D", "F", "G", "I", "K" ]
+    },
+    {
+      "ID": 39,
+      "Name": "PersonalScheduler",
+      "ParentID": 38,
+      "Role": [ "A", "F", "G", "I", "K" ]
+    },
+    {
+      "ID": 40,
+      "Name": "BackOfficeView",
+      "ParentID": 38,
+      "Role": [ "A", "C", "D", "F", "G", "I" ]
+    },
+    {
+      "ID": 42,
+      "Name": "StudentMaintenance",
+      "ParentID": 1,
+      "Role": [ "A", "C", "D", "F", "G", "I", "K" ]
+    },
+    {
+      "ID": 43,
+      "Name": "StudentDetail",
+      "ParentID": 42,
+      "Role": [ "A", "C", "D", "F", "G", "I" ]
+    },
+    {
+      "ID": 44,
+      "Name": "ActivateCoachCard",
+      "ParentID": 0,
+      "Role": [ "K" ]
+    },
+    {
+      "ID": 45,
+      "Name": "PersonalSchedulerDetail",
+      "ParentID": 38,
+      "Role": [ "A", "F", "G", "I", "K" ]
+    },
+    {
+      "ID": 46,
+      "Name": "SchoolPOS",
+      "ParentID": 1,
+      "Role": [ "A", "C", "D", "F", "G", "I" ]
+    },
+    {
+      "ID": 47,
+      "Name": "SchoolOtherIncome",
+      "ParentID": 46,
+      "Role": [ "A", "C", "D", "F", "G", "I" ]
+    },
+    {
+      "ID": 48,
+      "Name": "ClassEnrollment",
+      "ParentID": 46,
+      "Role": [ "A", "C", "D", "F", "G", "I" ]
+    },
+    {
+      "ID": 49,
+      "Name": "SchoolStartCashierSession",
+      "ParentID": 46,
+      "Role": [ "A", "C", "D", "F", "G", "I" ]
+    },
+    {
+      "ID": 50,
+      "Name": "SchoolEndCashierSession",
+      "ParentID": 3,
+      "Role": [ "A", "D", "F", "G", "I" ]
+    },
+    {
+      "ID": 51,
+      "Name": "WaitingList",
+      "ParentID": 1,
+      "Role": [ "A", "C", "D", "F", "G", "I" ]
+    },
+    {
+      "ID": 52,
+      "Name": "WaitingListMaintenance",
+      "ParentID": 51,
+      "Role": [ "A", "C", "D", "F", "G", "I" ]
+    },
+    {
+      "ID": 53,
+      "Name": "SuggestedClasses",
+      "ParentID": 51,
+      "Role": [ "A", "D", "F", "G", "I" ]
+    },
+    {
+      "ID": 54,
+      "Name": "CoachCommission",
+      "ParentID": 1,
+      "Role": [ "A", "F", "G", "I" ]
+    },
+    {
+      "ID": 55,
+      "Name": "SchoolDayEnd",
+      "ParentID": 3,
+      "Role": [ "A", "G", "I" ]
+    },
+    {
+      "ID": 56,
+      "Name": "SystemTemplate",
+      "ParentID": 8,
+      "Role": [ "A", "F", "G" ]
+    },
+    {
+      "ID": 57,
+      "Name": "SchoolTransactionSummary",
+      "ParentID": 3,
+      "Role": [ "A", "C", "D", "F", "G", "I" ]
+    },
+    {
+      "ID": 58,
+      "Name": "SchoolDiscountSummary",
+      "ParentID": 3,
+      "Role": [ "A", "D", "G", "I" ]
+    },
+    {
+      "ID": 59,
+      "Name": "EmailHistories",
+      "ParentID": 3,
+      "Role": [ "A", "D", "E", "G", "I" ]
+    },
+    {
+      "ID": 60,
+      "Name": "UnpaidLessons",
+      "ParentID": 3,
+      "Role": [ "A", "F", "G", "I" ]
+    },
+    {
+      "ID": 61,
+      "Name": "StudentRoster",
+      "ParentID": 1,
+      "Role": [ "A", "F", "G", "I" ]
+    },
+    {
+      "ID": 63,
+      "Name": "BoxOfficeTransactionSummary",
+      "ParentID": 3,
+      "Role": [ "A", "B", "E", "G", "H" ]
+    },
+    {
+      "ID": 64,
+      "Name": "IncomeByPaymentTypeSummary",
+      "ParentID": 3,
+      "Role": [ "A", "E", "G" ]
+    },
+    {
+      "ID": 70,
+      "Name": "ReportIndex",
+      "Role": [ "K" ],
+      "Not": true
+    },
+    {
+      "ID": 71,
+      "Name": "AdminOtherIncome",
+      "ParentID": 8,
+      "Role": [ "A", "F", "G" ]
+    },
+    {
+      "ID": 72,
+      "Name": "ISIApplication",
+      "ParentID": 1,
+      "Role": [ "A", "C", "D", "F", "G", "I" ]
+    },
+    {
+      "ID": 73,
+      "Name": "Promotion",
+      "ParentID": 2,
+      "Role": [ "A", "F", "G" ]
+    },
+    {
+      "ID": 74,
+      "Name": "Octopus",
+      "ParentID": 2,
+      "Role": [ "A", "B", "E", "F", "G", "H", "I" ]
+    },
+    {
+      "ID": 75,
+      "Name": "SkateRental",
+      "ParentID": 2,
+      "Role": [ "A", "F", "G", "I", "L" ]
+    },
+    {
+      "ID": 76,
+      "Name": "MonthlyLocker",
+      "ParentID": 2,
+      "Role": [ "A", "E", "F", "G", "H" ]
+    },
+    {
+      "ID": 77,
+      "Name": "CardDispenser",
+      "ParentID": 8,
+      "Role": [ "A", "F", "G" ]
+    },
+    {
+      "ID": 78,
+      "Name": "TurnstileManualAuth",
+      "ParentID": 8,
+      "Role": [ "A", "B", "C", "D", "E", "F", "G", "H", "I" ]
+    },
+    {
+      "ID": 79,
+      "Name": "OpenhourInfo",
+      "ParentID": 8,
+      "Role": [ "A", "F", "G" ]
+    },
+    {
+      "ID": 80,
+      "Name": "TurnstileAccessHistory",
+      "ParentID": 8,
+      "Role": [ "A", "B", "C", "D", "E", "F", "G", "H", "I" ]
+    }
+  ]
+}
