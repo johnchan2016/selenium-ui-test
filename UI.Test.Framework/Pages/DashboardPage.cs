@@ -17,9 +17,7 @@ namespace UI.Test.Framework.Pages
         }
 
         public bool IsDashboardPage()
-        {
-            Browser.WaitForElementVisible(dashboardTitle);
-
+        {          
             return dashboardTitle.IsDisplay();
         }
     }

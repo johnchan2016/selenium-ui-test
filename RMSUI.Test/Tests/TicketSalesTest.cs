@@ -16,17 +16,7 @@ namespace RMSUI.Test.Tests
     [TestFixture()]
     public class TicketSalesTest
     {
-        //IContainer container;
-        //ILifetimeScope scope;
-
         public TicketSalesTest() { }
-
-        [OneTimeSetUp]
-        public void Setup()
-        {
-            //container = Initializer.Initialize();
-            //scope = container.BeginLifetimeScope();
-        }
 
         [SetUp]
         public void Initialize()
@@ -35,8 +25,7 @@ namespace RMSUI.Test.Tests
             LoginPage loginPage = new LoginPage();
             DashboardPage dashboardPage = new DashboardPage();
 
-            var appConfig = FileHelper.LoadJson<AppConfig>(@"appsettings.json");
-            channelPage.GoTo($"{appConfig.RMSBaseUrl}{channelPage.Path}");
+            channelPage.GoTo($"{Browser.AppConfig.RMSBaseUrl}{channelPage.Path}");
 
             channelPage.ChooseAndClick(BaseTestData.USERNAME_PASSWORD_LOGIN);
 

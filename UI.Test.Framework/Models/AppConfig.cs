@@ -6,7 +6,8 @@ namespace UI.Test.Framework.Models
 {
     public class AppConfig
     {
-        public string WebDriverBasePath { get; set; }
+        public string BrowserType { get; set; }
         public string RMSBaseUrl { get; set; }
+        public int WaitForTimeout { get; set; }
     }
 }

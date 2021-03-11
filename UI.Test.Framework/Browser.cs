@@ -6,6 +6,8 @@ using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using UI.Test.Framework.Helpers;
+using UI.Test.Framework.Models;
 
 namespace UI.Test.Framework
 {
@@ -13,6 +15,7 @@ namespace UI.Test.Framework
     {
         private static IWebDriver _driver;
         private static int _waitTimeout = 30;
+        private static AppConfig _config;
 
         public static IWebDriver Driver
         {
@@ -20,9 +23,10 @@ namespace UI.Test.Framework
             {
                 if (_driver == null)
                 {
-                    var browserType = "chrome";
+                    _config = FileHelper.LoadJson<AppConfig>(@"appsettings.json");
+                    _waitTimeout = _config.WaitForTimeout;
 
-                    switch (browserType)
+                    switch (_config.BrowserType)
                     {
                         default:
                         case "chrome": // Chrome
@@ -41,7 +45,14 @@ namespace UI.Test.Framework
             set { _driver = value; }
         }
 
-
+        public static AppConfig AppConfig
+        {
+            get { 
+                if (_config == null) _config = FileHelper.LoadJson<AppConfig>(@"appsettings.json");
+                return _config;
+            }
+            set { _config = value; }
+        }
 
         public static void GoToUrl(string url)
         {
@@ -74,6 +85,8 @@ namespace UI.Test.Framework
 
         public static bool IsDisplay(this By by)
         {
+            WaitForElementVisible(by);
+
             var element = Driver.FindElement(by);
             return element.Displayed;
         }

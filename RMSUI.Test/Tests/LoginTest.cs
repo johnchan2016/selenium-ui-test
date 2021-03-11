@@ -15,21 +15,13 @@ namespace RMS.UI.Test.Tests
     [TestFixture()]
     public class LoginTest
     {
-        AppConfig config;
-
-        [OneTimeSetUp]
-        public void Setup()
-        {
-            config = FileHelper.LoadJson<AppConfig>(@"appsettings.json");
-        }
-
         [Test]
         public void Login()
         {
             ChannelPage channelPage = new ChannelPage();
             LoginPage loginPage = new LoginPage();
 
-            channelPage.GoTo(config.RMSBaseUrl);
+            channelPage.GoTo(Browser.AppConfig.RMSBaseUrl);
             channelPage.ChooseAndClick(BaseTestData.USERNAME_PASSWORD_LOGIN);
 
             loginPage.InputLoginName(BaseTestData.Admin.LOGIN_NAME);
