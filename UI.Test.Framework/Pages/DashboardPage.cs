@@ -9,7 +9,7 @@ namespace UI.Test.Framework.Pages
 {
     public class DashboardPage: BasePage
     {
-        IWebElement dashboardTitle => Driver.FindElement(By.CssSelector(FrameworkConstants.DashboardPage.DASHBOARD_TITLE_CSS));
+        By dashboardTitle = By.CssSelector(FrameworkConstants.DashboardPage.DASHBOARD_TITLE_CSS);
 
         public DashboardPage()
         {
@@ -18,8 +18,9 @@ namespace UI.Test.Framework.Pages
 
         public bool IsDashboardPage()
         {
-            Thread.Sleep(3000);
-            return dashboardTitle.Displayed;
+            Browser.WaitForElementVisible(dashboardTitle);
+
+            return dashboardTitle.IsDisplay();
         }
     }
 }

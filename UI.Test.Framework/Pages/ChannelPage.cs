@@ -8,8 +8,8 @@ namespace UI.Test.Framework.Pages
 {
     public class ChannelPage: BasePage
     {
-        IWebElement cardLoginButton => Driver.FindElement(By.Id(FrameworkConstants.LandingPage.CARD_LOGIN_BUTTON_ID));
-        IWebElement usernamePasswordLoginButton => Driver.FindElement(By.Id(FrameworkConstants.LandingPage.USERNAME_PASSWORD_LOGIN_BUTTON_ID));
+        By cardLoginButton => By.Id(FrameworkConstants.LandingPage.CARD_LOGIN_BUTTON_ID);
+        By usernamePasswordLoginButton => By.Id(FrameworkConstants.LandingPage.USERNAME_PASSWORD_LOGIN_BUTTON_ID);
 
         public void ChooseAndClick(string loginType)
         {

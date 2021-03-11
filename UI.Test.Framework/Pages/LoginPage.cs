@@ -8,13 +8,13 @@ namespace UI.Test.Framework.Pages
 {
     public class LoginPage: BasePage
     {
-        IWebElement userNameInput => Driver.FindElement(By.Id(FrameworkConstants.LoginPage.USERNAME_INPUT_ID));
-        IWebElement passwordInput => Driver.FindElement(By.Id(FrameworkConstants.LoginPage.PASSWORD_INPUT_ID));
-        IWebElement loginButton => Driver.FindElement(By.XPath(FrameworkConstants.LoginPage.LOGIN_BUTTON_XPATH));
+        By usernameInput = By.Id(FrameworkConstants.LoginPage.USERNAME_INPUT_ID);
+        By passwordInput = By.Id(FrameworkConstants.LoginPage.PASSWORD_INPUT_ID);
+        By loginBtn = By.XPath(FrameworkConstants.LoginPage.LOGIN_BUTTON_XPATH);
 
         public void InputLoginName(string loginId)
         {
-            userNameInput.SafeSendKey(loginId);
+            usernameInput.SafeSendKey(loginId);
         }
 
         public void InputLoginPassword(string password)
@@ -24,7 +24,7 @@ namespace UI.Test.Framework.Pages
 
         public void Login()
         {
-            loginButton.SafeClick();
+            loginBtn.SafeClick();
         }
     }
 }

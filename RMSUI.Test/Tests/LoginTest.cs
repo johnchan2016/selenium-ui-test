@@ -32,8 +32,6 @@ namespace RMS.UI.Test.Tests
             channelPage.GoTo(config.RMSBaseUrl);
             channelPage.ChooseAndClick(BaseTestData.USERNAME_PASSWORD_LOGIN);
 
-            Thread.Sleep(1000);
-
             loginPage.InputLoginName(BaseTestData.Admin.LOGIN_NAME);
             loginPage.InputLoginPassword(BaseTestData.Admin.LOGIN_PASSWORD);
             loginPage.Login();

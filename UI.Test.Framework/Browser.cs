@@ -29,8 +29,6 @@ namespace UI.Test.Framework
                             ChromeOptions options = new ChromeOptions();
                             options.AddArgument("--incognito");
                             _driver = new ChromeDriver(AppDomain.CurrentDomain.BaseDirectory, options);
-
-                            //_driver = new ChromeDriver(AppDomain.CurrentDomain.BaseDirectory);
                             break;
                     }
 
@@ -43,6 +41,8 @@ namespace UI.Test.Framework
             set { _driver = value; }
         }
 
+
+
         public static void GoToUrl(string url)
         {
             Driver.Navigate().GoToUrl(url);
@@ -51,8 +51,6 @@ namespace UI.Test.Framework
 
         public static void WaitForPageLoaded()
         {
-            //WaitForAjax();
-
             WaitForBusyBlock();
         }
 
@@ -62,53 +60,64 @@ namespace UI.Test.Framework
                 .Until(driver => element.Displayed);
         }
 
+        public static void WaitForElementVisible(By by)
+        {
+            new WebDriverWait(Driver, TimeSpan.FromSeconds(_waitTimeout))
+                .Until(driver => driver.FindElements(by).Count > 0);
+        }
+
         public static void WaitForElementInvisible(By by)
         {
             new WebDriverWait(Driver, TimeSpan.FromSeconds(_waitTimeout))
-                .Until(drv => drv.FindElements(by).Count == 0);
+                .Until(driver => driver.FindElements(by).Count == 0);
+        }
+
+        public static bool IsDisplay(this By by)
+        {
+            var element = Driver.FindElement(by);
+            return element.Displayed;
         }
 
         public static void SafeSendKey(this IWebElement element , string text)
         {
-            element.ScrollTo();
+            element.SendKeys(text);
+            WaitForPageLoaded();
+        }
+
+        public static void SafeSendKey(this By by, string text)
+        {
+            by.ScrollTo();
+
+            var element = Driver.FindElement(by);
             element.SendKeys(text);
             WaitForPageLoaded();
         }
 
         public static void SafeClick(this IWebElement element)
         {
-            element.ScrollTo();
+
             element.Click();
             WaitForPageLoaded();
         }
 
-        public static void ScrollTo(this IWebElement element)
+        public static void SafeClick(this By by)
         {
+            by.ScrollTo();
+
+            var element = Driver.FindElement(by);
+            element.Click();
+            WaitForPageLoaded();
+        }
+
+        public static void ScrollTo(this By by)
+        {
+            new WebDriverWait(Driver, TimeSpan.FromSeconds(_waitTimeout))
+                .Until(driver => driver.FindElements(by).Count > 0);
+
+            var element = Driver.FindElement(by);
             var actions = new Actions(Driver);
             actions.MoveToElement(element);
             actions.Perform();
-
-            new WebDriverWait(Driver, TimeSpan.FromSeconds(_waitTimeout))
-                .Until(driver => element.IsVisible());
-        }
-
-        public static bool IsVisible(this IWebElement element)
-        {
-            // Calculate the mid-point of element
-            // Check if the element could be found at that point
-
-            return Driver.ExecuteJavaScript<bool>(
-                "var elem = arguments[0],                 " +
-                "  box = elem.getBoundingClientRect(),    " +
-                "  cx = box.left + box.width / 2,         " +
-                "  cy = box.top + box.height / 2,         " +
-                "  e = document.elementFromPoint(cx, cy); " +
-                "for (; e; e = e.parentElement) {         " +
-                "  if (e === elem)                        " +
-                "    return true;                         " +
-                "}                                        " +
-                "return false;                            "
-                , element);
         }
 
         public static void Destroy()
@@ -118,20 +127,6 @@ namespace UI.Test.Framework
                 Driver.Quit();
                 Driver = null;
             }
-        }
-
-        private static void WaitForAjax()
-        {
-            // jQuery and AngularJs both loaded
-            var jQueryLoadedDefinition = "!!window.jQuery && window.jQuery.active == 0";
-
-            var angularJsLoadedDefinition =
-                "(typeof angular == 'undefined' || (typeof angular != 'undefined' && !!angular.element('body > div').injector() && angular.element('body > div').injector().get('$http') && angular.element('body > div').injector().get('$http').pendingRequests.length == 0))";
-
-            new WebDriverWait(Driver, TimeSpan.FromSeconds(_waitTimeout))
-                .Until(driver => (bool)((IJavaScriptExecutor)Driver)
-                    .ExecuteScript("return document.readyState == 'complete' && " + jQueryLoadedDefinition + " && " +
-                                   angularJsLoadedDefinition));
         }
 
         private static void WaitForBusyBlock()
