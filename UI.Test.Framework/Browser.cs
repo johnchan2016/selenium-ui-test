@@ -62,13 +62,8 @@ namespace UI.Test.Framework
 
         public static void WaitForPageLoaded()
         {
-            WaitForBusyBlock();
-        }
-
-        public static void WaitForElementVisible(IWebElement element)
-        {
-            new WebDriverWait(Driver, TimeSpan.FromSeconds(_waitTimeout))
-                .Until(driver => element.Displayed);
+            WaitForElementInvisible(By.ClassName("mat-progress-spinner"));
+            WaitForElementVisible(By.ClassName("dx-state-invisible"));
         }
 
         public static void WaitForElementVisible(By by)
@@ -91,10 +86,12 @@ namespace UI.Test.Framework
             return element.Displayed;
         }
 
-        public static void SafeSendKey(this IWebElement element , string text)
+        public static bool IsEnabled(this By by)
         {
-            element.SendKeys(text);
-            WaitForPageLoaded();
+            WaitForElementVisible(by);
+
+            var element = Driver.FindElement(by);
+            return element.Enabled;
         }
 
         public static void SafeSendKey(this By by, string text)
@@ -103,13 +100,6 @@ namespace UI.Test.Framework
 
             var element = Driver.FindElement(by);
             element.SendKeys(text);
-            WaitForPageLoaded();
-        }
-
-        public static void SafeClick(this IWebElement element)
-        {
-
-            element.Click();
             WaitForPageLoaded();
         }
 
@@ -141,11 +131,5 @@ namespace UI.Test.Framework
                 Driver = null;
             }
         }
-
-        private static void WaitForBusyBlock()
-        {
-            WaitForElementInvisible(By.ClassName("mat-progress-spinner"));
-        }
-
     }
 }

@@ -9,7 +9,7 @@ namespace UI.Test.Framework.Pages.BoxOffice
 {
     public class TicketSalesPage: BasePage
     {
-        IWebElement defaultTicket => Driver.FindElement(By.Id(FrameworkConstants.Ticket.DEFAULT_TICKETCODE));
+        By defaultTicket => By.Id(FrameworkConstants.Ticket.DEFAULT_TICKETCODE);
         CheckoutComponent checkoutComponent;
         PaymentComponent paymentComponent;
         CardOperationComponent cardOperationComponent;

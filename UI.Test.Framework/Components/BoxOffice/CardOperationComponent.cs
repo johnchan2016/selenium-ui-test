@@ -7,8 +7,8 @@ namespace UI.Test.Framework.Components.BoxOffice
 {
     public class CardOperationComponent: BaseComponent
     {
-        IWebElement successButton => Driver.FindElement(By.Id("successBtn"));
-        IWebElement failureButton => Driver.FindElement(By.Id("failureBtn"));
+        By successButton => By.Id("successBtn");
+        By failureButton => By.Id("failureBtn");
 
         public void CheckoutSuccess()
         {

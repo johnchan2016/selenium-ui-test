@@ -8,8 +8,8 @@ namespace UI.Test.Framework.Pages.BoxOffice
 {
     public class BoxOfficeStartSessionPage: BasePage
     {
-        IWebElement openingAmountInput => Driver.FindElement(By.Id("openingAmountInput"));
-        IWebElement startCashierSesstionButton => Driver.FindElement(By.Id("startCashierSessionBtn"));
+        By openingAmountInput => By.Id("openingAmountInput");
+        By startCashierSesstionButton => By.Id("startCashierSessionBtn");
 
 
         public void StartCashierSession()

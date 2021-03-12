@@ -7,12 +7,12 @@ namespace UI.Test.Framework.Components.BoxOffice
 {
     public class TicketQrCodeComponent : BaseComponent
     {
-        IWebElement receiptSection => Driver.FindElement(By.Id("divReceipt"));
-        IWebElement closeButton => Driver.FindElement(By.Id("closeBtn"));
+        By receiptSection => By.Id("divReceipt");
+        By closeButton => By.Id("closeBtn");
 
         public bool IsShowReciept()
         {
-            return receiptSection.Displayed;
+            return receiptSection.IsDisplay();
         }
 
         public void Close()

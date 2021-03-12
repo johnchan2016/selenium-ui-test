@@ -8,10 +8,10 @@ namespace UI.Test.Framework.Components.BoxOffice
 {
     public class PaymentComponent: BaseComponent
     {
-        IWebElement cashPayment => Driver.FindElement(By.Id("C00001"));
-        IWebElement discardButton => Driver.FindElement(By.Id("discardBtn"));
-        IWebElement checkoutButton => Driver.FindElement(By.Id("checkoutbtn"));
-        IWebElement refundButton => Driver.FindElement(By.Id("refundBtn"));
+        By cashPayment => By.Id("C00001");
+        By discardButton => By.Id("discardBtn");
+        By checkoutButton => By.Id("checkoutbtn");
+        By refundButton => By.Id("refundBtn");
 
         public void PayByCash()
         {
