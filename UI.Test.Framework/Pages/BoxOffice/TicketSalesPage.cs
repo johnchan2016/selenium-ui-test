@@ -21,6 +21,7 @@ namespace UI.Test.Framework.Pages.BoxOffice
             paymentComponent = new PaymentComponent();
             cardOperationComponent = new CardOperationComponent();
             ticketQrCodeComponent = new TicketQrCodeComponent();
+            path = "/boxoffice/pos/ticket-sales";
         }
 
         public CheckoutComponent CheckoutComponent => checkoutComponent;
@@ -28,12 +29,13 @@ namespace UI.Test.Framework.Pages.BoxOffice
         public CardOperationComponent CardOperationComponent => cardOperationComponent;
         public TicketQrCodeComponent TicketQrCodeComponent => ticketQrCodeComponent;
 
-        public void Checkout()
+        public string TicketSalesMenuItem => "TicketSales";
+
+        public void BuyDefaultTicketAndCheckout()
         {
             defaultTicket.SafeClick();
             checkoutComponent.Checkout();
             paymentComponent.PayByCash();
-            cardOperationComponent.CheckoutSuccess();
         }
 
         public bool IsPurchaseSuccess()

@@ -16,11 +16,11 @@ namespace UI.Test.Framework.Pages
             switch (loginType)
             {
                 case "cardLogin":
-                    cardLoginButton.SafeClick();
+                    cardLoginButton.ScrollAndClick();
                     break;
 
                 default:
-                    usernamePasswordLoginButton.SafeClick();
+                    usernamePasswordLoginButton.ScrollAndClick();
                     break;
             }
         }

@@ -5,6 +5,7 @@ using OpenQA.Selenium.Support.Extensions;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using UI.Test.Framework.Helpers;
 using UI.Test.Framework.Models;
@@ -60,30 +61,53 @@ namespace UI.Test.Framework
             WaitForPageLoaded();
         }
 
-        public static void WaitForPageLoaded()
+        public static void ExplicitWait(int overridenWaitTime = -1)
         {
-            WaitForElementInvisible(By.ClassName("mat-progress-spinner"));
-            WaitForElementVisible(By.ClassName("dx-state-invisible"));
+            int waitTime = overridenWaitTime == -1 ? _waitTimeout : overridenWaitTime;
+
+            new WebDriverWait(Driver, TimeSpan.FromSeconds(waitTime)).IgnoreExceptionTypes(typeof(NoSuchElementException));
         }
 
-        public static void WaitForElementVisible(By by)
+        public static void WaitForPageLoaded(int overrideWaitTime = -1)
         {
-            new WebDriverWait(Driver, TimeSpan.FromSeconds(_waitTimeout))
+            WaitForElementInvisible(By.ClassName("mat-progress-spinner"), overrideWaitTime);
+            //WaitForElementInvisible(By.ClassName("dx-state-invisible"));
+        }
+
+        public static void WaitForElementVisible(By by, int overridenWaitTime = -1)
+        {
+            int waitTime = overridenWaitTime == -1 ? _waitTimeout : overridenWaitTime;
+
+            new WebDriverWait(Driver, TimeSpan.FromSeconds(waitTime))
                 .Until(driver => driver.FindElements(by).Count > 0);
         }
 
-        public static void WaitForElementInvisible(By by)
+        public static void WaitForElementInvisible(By by, int overridenWaitTime = -1)
         {
-            new WebDriverWait(Driver, TimeSpan.FromSeconds(_waitTimeout))
+            int waitTime = overridenWaitTime == -1 ? _waitTimeout : overridenWaitTime;
+
+            new WebDriverWait(Driver, TimeSpan.FromSeconds(waitTime))
                 .Until(driver => driver.FindElements(by).Count == 0);
         }
 
-        public static bool IsDisplay(this By by)
+        public static bool IsDisplay(this By by, int overridenWaitTime = -1)
         {
-            WaitForElementVisible(by);
+            try
+            {
+                int waitTime = overridenWaitTime == -1 ? _waitTimeout : overridenWaitTime;
 
-            var element = Driver.FindElement(by);
-            return element.Displayed;
+                WaitForElementVisible(by, waitTime);
+
+                var element = Driver.FindElement(by);
+
+                var isShow = element.Displayed || element.GetCssValue("visibility") == "visible";
+                return isShow;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            finally { }
         }
 
         public static bool IsEnabled(this By by)
@@ -100,22 +124,37 @@ namespace UI.Test.Framework
 
             var element = Driver.FindElement(by);
             element.SendKeys(text);
-            WaitForPageLoaded();
         }
 
         public static void SafeClick(this By by)
+        {
+            WaitForElementVisible(by);
+
+            var element = Driver.FindElement(by);
+            element.Click();
+        }
+
+        public static void ScrollAndClick(this By by)
         {
             by.ScrollTo();
 
             var element = Driver.FindElement(by);
             element.Click();
-            WaitForPageLoaded();
+        }
+
+        public static string GetText(this By by)
+        {
+            WaitForElementVisible(by);
+
+            var element = Driver.FindElement(by);
+
+            Debug.WriteLine($"GetText: {element.Text}");
+            return element.Text;
         }
 
         public static void ScrollTo(this By by)
         {
-            new WebDriverWait(Driver, TimeSpan.FromSeconds(_waitTimeout))
-                .Until(driver => driver.FindElements(by).Count > 0);
+            WaitForElementVisible(by);
 
             var element = Driver.FindElement(by);
             var actions = new Actions(Driver);

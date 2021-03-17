@@ -15,8 +15,8 @@ namespace UI.Test.Framework.Components.BoxOffice
 
         public void PayByCash()
         {
-            cashPayment.SafeClick();
-            checkoutButton.SafeClick();
+            cashPayment.ScrollAndClick();
+            checkoutButton.ScrollAndClick();
         }
     }
 }

@@ -18,5 +18,16 @@ namespace UI.Test.Framework.Helpers
                 return obj;
             }
         }
+
+        public static IEnumerable<T> LoadJsonToList<T>(string filePath)
+        {
+            using (StreamReader r = new StreamReader(filePath))
+            {
+                string json = r.ReadToEnd();
+                IEnumerable<T> obj = JsonConvert.DeserializeObject<IEnumerable<T>>(json);
+
+                return obj;
+            }
+        }
     }
 }

@@ -1,23 +1,34 @@
 ﻿using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace UI.Test.Framework.Components.BoxOffice
 {
     public class CardOperationComponent: BaseComponent
     {
-        By successButton => By.Id("successBtn");
-        By failureButton => By.Id("failureBtn");
+        By finalStep => By.CssSelector(FrameworkConstants.CardOperationComponent.FINALSTEP_CSS);
+        By successMsgBox => By.XPath($"//*[contains(text(), '{FrameworkConstants.CardOperationComponent.SUCCESS_MESSAGE}')]");
 
-        public void CheckoutSuccess()
+        public bool IsCheckoutSuccess()
         {
-            successButton.SafeClick();
-        }
+            var isSuccess = successMsgBox.IsDisplay();
 
-        public void CheckoutFailure()
-        {
-            failureButton.SafeClick();
+            Debug.WriteLine($"isSuccess: {isSuccess}");
+
+            return isSuccess;
+
+            //Debug.WriteLine($"isFinalStep: {isFinalStep}");
+
+            //if (isFinalStep)
+            //{
+            //    var isSuccess = finalStepMsgBox.IsClickable();
+
+            //    Debug.WriteLine($"isSuccess: {isSuccess}");
+
+            //    if (isSuccess) successButton.SafeClick();
+            //}
         }
     }
 }

@@ -9,17 +9,14 @@ namespace UI.Test.Framework.Pages
     public class BasePage
     {
         string rmsMenu_prefix = "RmsMenuItem_";
-        internal RmsMenuItem RMSMenuItem;
+        internal IEnumerable<RmsMenuItem> rmsMenuItems;
         internal string path = "/channel";
         By MainMenu => By.Id("MainMenuButton");
-
-        By BoxOfficeMenu => By.Id($"{rmsMenu_prefix}BoxOffice");
-        By BoxOfficePosMenu => By.Id($"{rmsMenu_prefix}BoxOfficePos");
-        By BoxOfficeTicketSalesMenu => By.Id($"{rmsMenu_prefix}TicketSales");
+        internal By LoadingIndicator => By.ClassName("mat-progress-spinner");
 
         public BasePage()
         {
-            RMSMenuItem = FileHelper.LoadJson<RmsMenuItem>(@"RmsMenuItem.json");
+            rmsMenuItems = FileHelper.LoadJsonToList<RmsMenuItem>(@"RmsMenuItem.json");
         }
 
         public string Path => path;
@@ -28,11 +25,17 @@ namespace UI.Test.Framework.Pages
 
         public void GoTo(string url) => Browser.GoToUrl(url);
 
-        public void ClickTicketSalesMenu()
+        public void ClickTargetMenu(string targetMenuItem)
         {
-            BoxOfficeMenu.SafeClick();
-            BoxOfficePosMenu.SafeClick();
-            BoxOfficeTicketSalesMenu.SafeClick();
+            var menuItemNames = rmsMenuItems.GetRmsMenuItems(targetMenuItem, null);
+
+            MainMenu.SafeClick();
+
+            foreach (var name in menuItemNames)
+            {
+                By menuItemBy = By.Id($"{rmsMenu_prefix}{name}");
+                menuItemBy.ScrollAndClick();                
+            }
         }
     }
 }

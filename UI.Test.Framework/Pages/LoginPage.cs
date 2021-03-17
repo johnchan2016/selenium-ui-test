@@ -24,7 +24,7 @@ namespace UI.Test.Framework.Pages
 
         public void Login()
         {
-            loginBtn.SafeClick();
+            loginBtn.ScrollAndClick();
         }
     }
 }

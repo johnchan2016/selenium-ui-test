@@ -12,7 +12,7 @@ namespace UI.Test.Framework.Components.BoxOffice
 
         public bool IsShowReciept()
         {
-            return receiptSection.IsDisplay();
+            return receiptSection.IsDisplay(5);
         }
 
         public void Close()

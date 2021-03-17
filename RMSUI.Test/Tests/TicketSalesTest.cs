@@ -16,17 +16,19 @@ namespace RMSUI.Test.Tests
     [TestFixture()]
     public class TicketSalesTest
     {
-        public TicketSalesTest() { }
+        ChannelPage channelPage;
+        LoginPage loginPage;
+
+        public TicketSalesTest() 
+        {
+            channelPage = new ChannelPage();
+            loginPage = new LoginPage();
+        }
 
         [SetUp]
         public void Initialize()
         {
-            ChannelPage channelPage = new ChannelPage();
-            LoginPage loginPage = new LoginPage();
-            DashboardPage dashboardPage = new DashboardPage();
-
-            channelPage.GoTo($"{Browser.AppConfig.RMSBaseUrl}{channelPage.Path}");
-
+            channelPage.GoTo(Browser.AppConfig.RMSBaseUrl);
             channelPage.ChooseAndClick(BaseTestData.USERNAME_PASSWORD_LOGIN);
 
             loginPage.InputLoginName(BaseTestData.Admin.LOGIN_NAME);
@@ -34,17 +36,25 @@ namespace RMSUI.Test.Tests
             loginPage.Login();
 
             //assert
+            DashboardPage dashboardPage = new DashboardPage();
             Assert.IsTrue(dashboardPage.IsDashboardPage());
         }
 
         [Test]
         public void BuyDefaultTicket()
         {
+            BoxOfficeStartSessionPage startSessionPage = new BoxOfficeStartSessionPage();
             TicketSalesPage ticketSalesPage = new TicketSalesPage();
-            ticketSalesPage.Checkout();
+
+            loginPage.ClickTargetMenu(ticketSalesPage.TicketSalesMenuItem);
+
+            if (startSessionPage.ValidateSessionEnabled()) 
+                startSessionPage.StartCashierSession();
+
+            ticketSalesPage.BuyDefaultTicketAndCheckout();
 
             //assert
-            Assert.IsTrue(ticketSalesPage.IsPurchaseSuccess());
+            Assert.IsTrue(ticketSalesPage.CardOperationComponent.IsCheckoutSuccess());
         }
 
         [TearDown]

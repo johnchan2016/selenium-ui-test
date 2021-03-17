@@ -8,5 +8,6 @@ namespace UI.Test.Framework.Components
     public class BaseComponent
     {
         public IWebDriver Driver => Browser.Driver;
+        internal By LoadingIndicator => By.ClassName("mat-progress-spinner");
     }
 }

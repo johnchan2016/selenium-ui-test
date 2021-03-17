@@ -28,5 +28,27 @@ namespace UI.Test.Framework
         {
             public const string DEFAULT_TICKETCODE = "$00000";
         }
+
+        public class Numpad
+        {
+            public const string DIGIT_CLEAR_ID = "btnClear";
+            public const string DIGIT_RETURN_ID = "btnReturn";
+        }
+
+        public class CardOperationComponent
+        {
+            public const string FINALSTEP_CSS = "mat-horizontal-stepper div.mat-horizontal-stepper-content:last-child";
+            public const string FINALSTEP_MESSAGEBOX_XPATH = "//*[@id='finalStepMsgBox']";
+            public const string SUCCESS_BUTTON_CSS = "button#successBtn";
+            public const string FAILURE_BUTTON_CSS = "button#failureBtn";
+            public const string SUCCESS_MESSAGE = "success";
+        }
+
+        public class BoxOfficeStartSessionPage
+        {
+            public const string OPEN_AMOUNT_INPUT_ID = "openingAmountInput";
+            public const string START_CASHIER_SESSTION_BUTTON_ID = "startCashierSessionBtn";
+            public const string START__SESSTION_SECTION_ID = "startSessionSection";
+        }
     }
 }

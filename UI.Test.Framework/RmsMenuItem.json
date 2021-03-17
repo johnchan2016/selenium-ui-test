@@ -1,5 +1,4 @@
-{
-  "RmsMenuItem": [
+[
     {
       "ID": -1,
       "Name": "Dashboard",
@@ -405,5 +404,5 @@
       "ParentID": 8,
       "Role": [ "A", "B", "C", "D", "E", "F", "G", "H", "I" ]
     }
-  ]
-}
+]
+
