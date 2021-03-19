@@ -162,6 +162,11 @@ namespace UI.Test.Framework
             actions.Perform();
         }
 
+        public static void CaptureScreen()
+        {
+            Driver.TakeScreenshot();
+        }
+
         public static void Destroy()
         {
             if (Driver != null)

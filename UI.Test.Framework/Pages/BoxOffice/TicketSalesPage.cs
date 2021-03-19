@@ -29,18 +29,13 @@ namespace UI.Test.Framework.Pages.BoxOffice
         public CardOperationComponent CardOperationComponent => cardOperationComponent;
         public TicketQrCodeComponent TicketQrCodeComponent => ticketQrCodeComponent;
 
-        public string TicketSalesMenuItem => "TicketSales";
+        public string TargetMenuItem => "TicketSales";
 
         public void BuyDefaultTicketAndCheckout()
         {
             defaultTicket.SafeClick();
             checkoutComponent.Checkout();
             paymentComponent.PayByCash();
-        }
-
-        public bool IsPurchaseSuccess()
-        {
-            return ticketQrCodeComponent.IsShowReciept();
         }
     }
 }

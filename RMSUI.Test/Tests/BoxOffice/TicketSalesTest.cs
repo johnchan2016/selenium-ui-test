@@ -11,7 +11,7 @@ using UI.Test.Framework.Models;
 using UI.Test.Framework.Pages;
 using UI.Test.Framework.Pages.BoxOffice;
 
-namespace RMSUI.Test.Tests
+namespace RMSUI.Test.Tests.BoxOffice
 {
     [TestFixture()]
     public class TicketSalesTest
@@ -46,7 +46,7 @@ namespace RMSUI.Test.Tests
             BoxOfficeStartSessionPage startSessionPage = new BoxOfficeStartSessionPage();
             TicketSalesPage ticketSalesPage = new TicketSalesPage();
 
-            loginPage.ClickTargetMenu(ticketSalesPage.TicketSalesMenuItem);
+            loginPage.ClickTargetMenu(ticketSalesPage.TargetMenuItem);
 
             if (startSessionPage.ValidateSessionEnabled()) 
                 startSessionPage.StartCashierSession();
@@ -55,6 +55,7 @@ namespace RMSUI.Test.Tests
 
             //assert
             Assert.IsTrue(ticketSalesPage.CardOperationComponent.IsCheckoutSuccess());
+            Browser.CaptureScreen();
         }
 
         [TearDown]
