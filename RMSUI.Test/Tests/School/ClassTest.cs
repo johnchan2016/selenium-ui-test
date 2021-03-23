@@ -12,34 +12,15 @@ using UI.Test.Framework.Pages.School;
 namespace RMSUI.Test.Tests.School
 {
     [TestFixture()]
-    public class ClassTests
+    public class ClassTest: BaseTest
     {
-        ChannelPage channelPage;
-        LoginPage loginPage;
         ClassMaintenancePage classMaintenancePage;
         ClassDetailPage classDetailPage;
 
-        public ClassTests()
+        public ClassTest()
         {
-            channelPage = new ChannelPage();
-            loginPage = new LoginPage();
             classMaintenancePage = new ClassMaintenancePage();
             classDetailPage = new ClassDetailPage();
-        }
-
-        [SetUp]
-        public void Initialize()
-        {
-            channelPage.GoTo(Browser.AppConfig.RMSBaseUrl);
-            channelPage.ChooseAndClick(BaseTestData.USERNAME_PASSWORD_LOGIN);
-
-            loginPage.InputLoginName(BaseTestData.Admin.LOGIN_NAME);
-            loginPage.InputLoginPassword(BaseTestData.Admin.LOGIN_PASSWORD);
-            loginPage.Login();
-
-            //assert
-            DashboardPage dashboardPage = new DashboardPage();
-            Assert.IsTrue(dashboardPage.IsDashboardPage());
         }
 
         [TestCase(".dx-scheduler-date-table tr:nth-child(5) td:nth-child(2)", ".dx-scheduler-date-table tr:nth-child(5) td:nth-child(2) div.cell-with-classes", true)]
@@ -64,12 +45,6 @@ namespace RMSUI.Test.Tests.School
             //assert
             var isClassDetailPage = classDetailPage.IsClassDetailPage();
             Assert.IsTrue(isClassDetailPage);
-        }
-
-        [TearDown]
-        public void Destroy()
-        {
-            Browser.Destroy();
         }
 
         public static IEnumerable<ClassDetail> ClassDetailData => FileHelper.LoadJsonToList<ClassDetail>(@$"{AppDomain.CurrentDomain.BaseDirectory}\TestData\ClassDetail.json");

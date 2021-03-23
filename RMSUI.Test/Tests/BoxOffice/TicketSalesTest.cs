@@ -14,39 +14,15 @@ using UI.Test.Framework.Pages.BoxOffice;
 namespace RMSUI.Test.Tests.BoxOffice
 {
     [TestFixture()]
-    public class TicketSalesTest
+    public class TicketSalesTest: BaseTest
     {
-        ChannelPage channelPage;
-        LoginPage loginPage;
-
-        public TicketSalesTest() 
-        {
-            channelPage = new ChannelPage();
-            loginPage = new LoginPage();
-        }
-
-        [SetUp]
-        public void Initialize()
-        {
-            channelPage.GoTo(Browser.AppConfig.RMSBaseUrl);
-            channelPage.ChooseAndClick(BaseTestData.USERNAME_PASSWORD_LOGIN);
-
-            loginPage.InputLoginName(BaseTestData.Admin.LOGIN_NAME);
-            loginPage.InputLoginPassword(BaseTestData.Admin.LOGIN_PASSWORD);
-            loginPage.Login();
-
-            //assert
-            DashboardPage dashboardPage = new DashboardPage();
-            Assert.IsTrue(dashboardPage.IsDashboardPage());
-        }
-
         [Test]
         public void BuyDefaultTicket()
         {
             BoxOfficeStartSessionPage startSessionPage = new BoxOfficeStartSessionPage();
             TicketSalesPage ticketSalesPage = new TicketSalesPage();
 
-            loginPage.ClickTargetMenu(ticketSalesPage.TargetMenuItem);
+            base.loginPage.ClickTargetMenu(ticketSalesPage.TargetMenuItem);
 
             if (startSessionPage.ValidateSessionEnabled()) 
                 startSessionPage.StartCashierSession();
@@ -55,12 +31,6 @@ namespace RMSUI.Test.Tests.BoxOffice
 
             //assert
             Assert.IsTrue(ticketSalesPage.CardOperationComponent.IsCheckoutSuccess());
-        }
-
-        [TearDown]
-        public void Destroy()
-        {
-            Browser.Destroy();
         }
     }
 }
