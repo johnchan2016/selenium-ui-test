@@ -48,7 +48,26 @@ namespace UI.Test.Framework
         {
             public const string OPEN_AMOUNT_INPUT_ID = "openingAmountInput";
             public const string START_CASHIER_SESSTION_BUTTON_ID = "startCashierSessionBtn";
-            public const string START__SESSTION_SECTION_ID = "startSessionSection";
+            public const string START_SESSTION_SECTION_ID = "startSessionSection";
+        }
+
+        public class ClassListingComponent
+        {
+            public const string ADD_CLASS_BUTTON_ID = "addClassBtn";
+            public const string REFRESH_BUTTON_ID = "refreshClassBtn";
+        }
+
+        public class ClassDetailComponent
+        {
+            public const string COACH_INPUT_XPATH = "//input[@formControlName='coachId']";
+            public const string CLASSTYPE_SELECT_XPATH = "//mat-select[@formcontrolname='classTypeId']";
+            public const string SKILL_SELECT_XPATH = "//mat-select[@formcontrolname='skillLevelId']";
+            public const string LANG_SELECT_XPATH = "//mat-select[@formcontrolname='language']";
+            public const string DESC_INPUT_XPATH = "//input[@formControlName='description']";
+            public const string CANCEL_CLASS_BUTTON_ID = "cancelClassBtn";
+            public const string SAVE_CLASS_BUTTON_ID = "saveClassBtn";
+            public const string SUBMIT_CLASS_BUTTON_ID = "submitClassBtn";
+            public const string CLEAR_CLASS_BUTTON_ID = "clearClassBtn";
         }
     }
 }

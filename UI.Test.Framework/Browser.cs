@@ -61,11 +61,11 @@ namespace UI.Test.Framework
             WaitForPageLoaded();
         }
 
-        public static void ExplicitWait(int overridenWaitTime = -1)
+        public static void ImplicitWait(int overridenWaitTime = -1)
         {
             int waitTime = overridenWaitTime == -1 ? _waitTimeout : overridenWaitTime;
 
-            new WebDriverWait(Driver, TimeSpan.FromSeconds(waitTime)).IgnoreExceptionTypes(typeof(NoSuchElementException));
+            Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(overridenWaitTime);
         }
 
         public static void WaitForPageLoaded(int overrideWaitTime = -1)
@@ -110,9 +110,12 @@ namespace UI.Test.Framework
             finally { }
         }
 
-        public static bool IsEnabled(this By by)
+        public static bool IsEnabled(this By by, int overridenWaitTime = -1)
         {
-            WaitForElementVisible(by);
+            int waitTime = overridenWaitTime == -1 ? _waitTimeout : overridenWaitTime;
+
+            var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(waitTime));
+            wait.PollingInterval = TimeSpan.FromSeconds(2);
 
             var element = Driver.FindElement(by);
             return element.Enabled;
@@ -142,6 +145,12 @@ namespace UI.Test.Framework
             element.Click();
         }
 
+        public static void ClickEsc()
+        {
+            var actions = new Actions(Driver);
+            actions.SendKeys(Keys.Escape).Perform();
+        }
+
         public static string GetText(this By by)
         {
             WaitForElementVisible(by);
@@ -162,15 +171,35 @@ namespace UI.Test.Framework
             actions.Perform();
         }
 
-        public static void CaptureScreen()
+        public static void SelectByValue(this By by, string value)
         {
-            Driver.TakeScreenshot();
+            WaitForElementVisible(by);
+
+            var element = Driver.FindElement(by);
+            var selectElement = new SelectElement(element);
+
+            selectElement.SelectByValue(value);
+        }
+
+        public static void SelectByTextByXPath(string optionText)
+        {
+            By target = By.XPath($"//mat-option[contains(.,'{optionText}')]");
+            target.SafeClick();
+        }
+
+        public static void MultipleSelectByText(List<string> optionTexts)
+        {
+            foreach(var option in optionTexts)
+            {
+                SelectByTextByXPath(option);
+            }
         }
 
         public static void Destroy()
         {
             if (Driver != null)
             {
+                Driver.TakeScreenshot();
                 Driver.Quit();
                 Driver = null;
             }

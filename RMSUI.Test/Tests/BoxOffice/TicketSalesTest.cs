@@ -55,7 +55,6 @@ namespace RMSUI.Test.Tests.BoxOffice
 
             //assert
             Assert.IsTrue(ticketSalesPage.CardOperationComponent.IsCheckoutSuccess());
-            Browser.CaptureScreen();
         }
 
         [TearDown]

@@ -4,6 +4,8 @@ using System.Text;
 using NUnit.Framework;
 using RMS.UI.Test.TestData;
 using UI.Test.Framework;
+using UI.Test.Framework.Helpers;
+using UI.Test.Framework.Models;
 using UI.Test.Framework.Pages;
 using UI.Test.Framework.Pages.School;
 
@@ -15,12 +17,14 @@ namespace RMSUI.Test.Tests.School
         ChannelPage channelPage;
         LoginPage loginPage;
         ClassMaintenancePage classMaintenancePage;
+        ClassDetailPage classDetailPage;
 
         public ClassTests()
         {
             channelPage = new ChannelPage();
             loginPage = new LoginPage();
             classMaintenancePage = new ClassMaintenancePage();
+            classDetailPage = new ClassDetailPage();
         }
 
         [SetUp]
@@ -48,7 +52,18 @@ namespace RMSUI.Test.Tests.School
 
             //assert
             Assert.AreEqual(hasCreated, expected);
-            Browser.CaptureScreen();
+        }
+
+        [TestCaseSource("ClassDetailData")]
+        public void Create_Class(ClassDetail classDetail)
+        {
+            classMaintenancePage.ClickTargetMenu(classMaintenancePage.TargetMenuItem);
+
+            classMaintenancePage.ClassListingComponent.CreateClass(classDetail);
+
+            //assert
+            var isClassDetailPage = classDetailPage.IsClassDetailPage();
+            Assert.IsTrue(isClassDetailPage);
         }
 
         [TearDown]
@@ -56,5 +71,7 @@ namespace RMSUI.Test.Tests.School
         {
             Browser.Destroy();
         }
+
+        public static IEnumerable<ClassDetail> ClassDetailData => FileHelper.LoadJsonToList<ClassDetail>(@$"{AppDomain.CurrentDomain.BaseDirectory}\TestData\ClassDetail.json");
     }
 }

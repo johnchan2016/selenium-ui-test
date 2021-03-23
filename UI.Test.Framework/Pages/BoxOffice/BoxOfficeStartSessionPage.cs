@@ -13,7 +13,7 @@ namespace UI.Test.Framework.Pages.BoxOffice
     {
         By openingAmountInput => By.Id(FrameworkConstants.BoxOfficeStartSessionPage.OPEN_AMOUNT_INPUT_ID);
         By startCashierSesstionButton => By.Id(FrameworkConstants.BoxOfficeStartSessionPage.START_CASHIER_SESSTION_BUTTON_ID);
-        By startSessionSection => By.Id(FrameworkConstants.BoxOfficeStartSessionPage.START__SESSTION_SECTION_ID);
+        By startSessionSection => By.Id(FrameworkConstants.BoxOfficeStartSessionPage.START_SESSTION_SECTION_ID);
         NumpadComponent numpadComponent;
 
         public BoxOfficeStartSessionPage()
