@@ -1,0 +1,12 @@
+[
+  {
+    "Timeslot_css": ".dx-scheduler-date-table tr:nth-child(5) td:nth-child(2)",
+    "TargetDateslot_css": ".dx-scheduler-date-table tr:nth-child(5) td:nth-child(2) div.cell-with-classes",
+    "Expected": true
+  },
+  {
+    "Timeslot_css": ".dx-scheduler-date-table tr:nth-child(5) td:nth-child(2)",
+    "TargetDateslot_css": ".dx-scheduler-date-table tr:nth-child(5) td:nth-child(1) div.cell-with-classes",
+    "Expected": false
+  }
+]
