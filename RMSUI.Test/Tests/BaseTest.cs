@@ -10,6 +10,7 @@ using AventStack.ExtentReports.Reporter;
 using System.IO;
 using System.Reflection;
 using OpenQA.Selenium;
+using NUnit.Framework.Interfaces;
 
 namespace RMSUI.Test.Tests
 {
@@ -18,8 +19,9 @@ namespace RMSUI.Test.Tests
     {
         protected ChannelPage channelPage;
         protected LoginPage loginPage;
-        protected AventStack.ExtentReports.ExtentReports _extent;
-        protected ExtentV3HtmlReporter _reporter;
+        AventStack.ExtentReports.ExtentReports _extent = null;
+        ExtentV3HtmlReporter _reporter = null;
+        ExtentTest _test = null;
         string _path;
         string _actualPath;
         string _projectPath;
@@ -61,6 +63,8 @@ namespace RMSUI.Test.Tests
         [SetUp]
         public void Initialize()
         {
+            //_test = _extent.CreateTest(TestContext.CurrentContext.Test.Name);
+
             channelPage.GoTo(Browser.AppConfig.RMSBaseUrl);
             channelPage.ChooseAndClick(BaseTestData.USERNAME_PASSWORD_LOGIN);
 
@@ -72,6 +76,36 @@ namespace RMSUI.Test.Tests
         [TearDown]
         public void Destroy()
         {
+            /*
+            var status = TestContext.CurrentContext.Result.Outcome.Status;
+            var stacktrace = string.IsNullOrEmpty(TestContext.CurrentContext.Result.StackTrace)
+                    ? ""
+                    : string.Format("{0}", TestContext.CurrentContext.Result.StackTrace);
+            Status logstatus;
+
+            switch (status)
+            {
+                case TestStatus.Failed:
+                    logstatus = Status.Fail;
+                    DateTime time = DateTime.Now;
+                    String fileName = "Screenshot_" + time.ToString("HHmmss") + ".png";
+                    String screenShotPath = Capture(Browser.Driver, fileName);
+                    _test.Log(Status.Fail, "Fail");
+                    _test.Log(Status.Fail, "Snapshot below: " + _test.AddScreenCaptureFromPath($@"Screenshots\{fileName}"));
+                    break;
+                case TestStatus.Inconclusive:
+                    logstatus = Status.Warning;
+                    break;
+                case TestStatus.Skipped:
+                    logstatus = Status.Skip;
+                    break;
+                default:
+                    logstatus = Status.Pass;
+                    break;
+            }
+
+            _test.Log(logstatus, "Test ended with " + logstatus + stacktrace);
+            */
             Browser.Destroy();
         }
 
