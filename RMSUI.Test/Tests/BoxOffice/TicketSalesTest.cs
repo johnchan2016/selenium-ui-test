@@ -14,6 +14,7 @@ using UI.Test.Framework.Pages.BoxOffice;
 namespace RMSUI.Test.Tests.BoxOffice
 {
     [TestFixture()]
+    //[Parallelizable]
     public class TicketSalesTest: BaseTest
     {
         [Test]

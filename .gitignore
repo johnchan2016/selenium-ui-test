@@ -14,3 +14,4 @@ packages
 /FrontEnd/rms-angular/junit
 /FrontEnd/TestAgent/oauth-client/node_modules
 /API/SPL.RMS/Logs
+/RMSUI.Test/Reports_*

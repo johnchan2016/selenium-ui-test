@@ -14,6 +14,7 @@ using UI.Test.Framework.Pages;
 namespace RMS.UI.Test.Tests
 {
     [TestFixture()]
+    //[Parallelizable]
     public class LoginTest: BaseTest
     {
         [Test]

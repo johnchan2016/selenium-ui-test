@@ -13,25 +13,25 @@ namespace UI.Test.Framework.Components.School
         By skillSelect => By.XPath(FrameworkConstants.ClassDetailComponent.SKILL_SELECT_XPATH);
         By langSelect => By.XPath(FrameworkConstants.ClassDetailComponent.LANG_SELECT_XPATH);
         By descInput => By.XPath(FrameworkConstants.ClassDetailComponent.DESC_INPUT_XPATH);
-        By saveButton => By.Id(FrameworkConstants.ClassDetailComponent.SAVE_CLASS_BUTTON_ID);
-        By cancelButton => By.Id(FrameworkConstants.ClassDetailComponent.CANCEL_CLASS_BUTTON_ID);
-        By submitButton => By.Id(FrameworkConstants.ClassDetailComponent.SUBMIT_CLASS_BUTTON_ID);
-        By clearButton => By.Id(FrameworkConstants.ClassDetailComponent.CLEAR_CLASS_BUTTON_ID);
+        By saveButton => By.XPath(FrameworkConstants.ClassDetailComponent.SAVE_CLASS_BUTTON_XPATH);
+        By cancelButton => By.XPath(FrameworkConstants.ClassDetailComponent.CANCEL_CLASS_BUTTON_XPATH);
+        By submitButton => By.XPath(FrameworkConstants.ClassDetailComponent.SUBMIT_CLASS_BUTTON_XPATH);
+        By clearButton => By.XPath(FrameworkConstants.ClassDetailComponent.CLEAR_CLASS_BUTTON_XPATH);
 
-        public void FillInClassDetails(ClassDetail classDetail)
+        public void FillInClassDetails(ClassInfo classInfo)
         {
-            coachInput.SafeSendKey(classDetail.CoachNo);
-            Browser.SelectByTextByXPath(classDetail.CoachNo);
+            coachInput.SafeSendKey(classInfo.CoachNo);
+            Browser.SelectByTextByXPath(classInfo.CoachNo);
 
             classTypeSelect.SafeClick();
-            Browser.SelectByTextByXPath(classDetail.ClassType);
+            Browser.SelectByTextByXPath(classInfo.ClassType);
 
             skillSelect.SafeClick();
-            Browser.SelectByTextByXPath(classDetail.Skill);
+            Browser.SelectByTextByXPath(classInfo.Skill);
 
             langSelect.SafeClick();
-            Browser.MultipleSelectByText(classDetail.Languages);
-            Browser.ClickEsc();
+            Browser.MultipleSelectByText(classInfo.Languages);
+            Browser.ClickCustomKey(Keys.Escape);
 
             submitButton.SafeClick();
         }

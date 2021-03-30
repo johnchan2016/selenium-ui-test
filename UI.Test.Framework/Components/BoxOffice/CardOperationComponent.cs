@@ -9,7 +9,7 @@ namespace UI.Test.Framework.Components.BoxOffice
     public class CardOperationComponent: BaseComponent
     {
         By finalStep => By.CssSelector(FrameworkConstants.CardOperationComponent.FINALSTEP_CSS);
-        By successMsgBox => By.XPath($"//*[contains(text(), '{FrameworkConstants.CardOperationComponent.SUCCESS_MESSAGE}')]");
+        By successMsgBox => By.XPath($"//div[contains(text(), '{FrameworkConstants.CardOperationComponent.SUCCESS_MESSAGE}')]");
 
         public bool IsCheckoutSuccess()
         {

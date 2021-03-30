@@ -112,13 +112,39 @@ namespace UI.Test.Framework
 
         public static bool IsEnabled(this By by, int overridenWaitTime = -1)
         {
-            int waitTime = overridenWaitTime == -1 ? _waitTimeout : overridenWaitTime;
+            try
+            {
+                int waitTime = overridenWaitTime == -1 ? _waitTimeout : overridenWaitTime;
 
-            var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(waitTime));
-            wait.PollingInterval = TimeSpan.FromSeconds(2);
+                var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(waitTime));
+                wait.PollingInterval = TimeSpan.FromSeconds(2);
 
-            var element = Driver.FindElement(by);
-            return element.Enabled;
+                var element = Driver.FindElement(by);
+                return element.Enabled;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            finally { }
+        }
+
+        public static bool HasElement(this By by, int overridenWaitTime = -1)
+        {
+            try
+            {
+                int waitTime = overridenWaitTime == -1 ? _waitTimeout : overridenWaitTime;
+
+                var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(waitTime));
+                wait.PollingInterval = TimeSpan.FromSeconds(2);
+
+                return wait.Until(driver => driver.FindElements(by).Count > 0);
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            finally { }
         }
 
         public static void SafeSendKey(this By by, string text)
@@ -145,10 +171,10 @@ namespace UI.Test.Framework
             element.Click();
         }
 
-        public static void ClickEsc()
+        public static void ClickCustomKey(string keyName)
         {
             var actions = new Actions(Driver);
-            actions.SendKeys(Keys.Escape).Perform();
+            actions.SendKeys(keyName).Perform();
         }
 
         public static string GetText(this By by)
@@ -193,6 +219,16 @@ namespace UI.Test.Framework
             {
                 SelectByTextByXPath(option);
             }
+        }
+
+        public static void DragAndDrop(this By source, By target)
+        {
+            WaitForElementVisible(source);
+
+            var sourceElm = Driver.FindElement(source);
+            var targetElm = Driver.FindElement(target);
+            var actions = new Actions(Driver);
+            actions.DragAndDrop(sourceElm, targetElm).Build().Perform();
         }
 
         public static void Destroy()

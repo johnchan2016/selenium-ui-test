@@ -7,8 +7,8 @@ namespace UI.Test.Framework.Components.Widget
 {
     public class NumpadComponent
     {
-        By digitClearBtn => By.Id(FrameworkConstants.Numpad.DIGIT_CLEAR_ID);
-        By digitReturnBtn => By.Id(FrameworkConstants.Numpad.DIGIT_RETURN_ID);
+        By digitClearBtn => By.Id(FrameworkConstants.NumpadComponent.DIGIT_CLEAR_ID);
+        By digitReturnBtn => By.Id(FrameworkConstants.NumpadComponent.DIGIT_RETURN_ID);
 
         public void ClickClearButton() => digitClearBtn.SafeClick();
         public void ClickReturnButton() => digitReturnBtn.SafeClick();

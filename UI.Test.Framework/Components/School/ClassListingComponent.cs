@@ -19,11 +19,11 @@ namespace UI.Test.Framework.Components.School
             classDetailComponent = new ClassDetailComponent();
         }
 
-        public void CreateClass(ClassDetail classDetail)
+        public void CreateClass(ClassInfo classInfo)
         {
             addClassButton.IsDisplay();
             addClassButton.SafeClick();
-            classDetailComponent.FillInClassDetails(classDetail);
+            classDetailComponent.FillInClassDetails(classInfo);
         }
     }
 }

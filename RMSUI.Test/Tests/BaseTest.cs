@@ -31,13 +31,13 @@ namespace RMSUI.Test.Tests
             channelPage = new ChannelPage();
             loginPage = new LoginPage();
 
+            string dateformat_yyyyMMdd = DateTime.Now.ToString("yyyyMMdd");
             _path = Assembly.GetCallingAssembly().CodeBase;
             _actualPath = _path.Substring(0, _path.LastIndexOf("bin"));
-            string dateformat_yyyyMMdd = DateTime.Now.ToString("yyyyMMdd");
-            _projectPath = $@"{new Uri(_actualPath).LocalPath}\Reports_{dateformat_yyyyMMdd}";
+            _projectPath = $@"{new Uri(_actualPath).LocalPath}\Reports\{dateformat_yyyyMMdd}";
         }
 
-        /*
+        
         [OneTimeSetUp]
         public void StartReport()
         {
@@ -47,23 +47,23 @@ namespace RMSUI.Test.Tests
             var reportPath = $@"{_projectPath}\ExtentReport.html";
 
             _reporter = new ExtentV3HtmlReporter(reportPath);
-            _reporter.Config.DocumentTitle = "Automation Testing Report";
-            _reporter.Config.ReportName = "Regression Testing";
+            _reporter.Config.DocumentTitle = Browser.AppConfig.Report.DocumentTitle;
+            _reporter.Config.ReportName = Browser.AppConfig.Report.ReportName;
             _reporter.Config.Theme = AventStack.ExtentReports.Reporter.Configuration.Theme.Standard;
 
             _extent = new AventStack.ExtentReports.ExtentReports();
             _extent.AttachReporter(_reporter);
 
-            _extent.AddSystemInfo("Environment", "SIT");
+            _extent.AddSystemInfo("Environment", Browser.AppConfig.Report.Environment);
             _extent.AddSystemInfo("Machine", Environment.MachineName);
             _extent.AddSystemInfo("OS", Environment.OSVersion.VersionString);
         }
-        */
+        
 
         [SetUp]
         public void Initialize()
         {
-            //_test = _extent.CreateTest(TestContext.CurrentContext.Test.Name);
+            _test = _extent.CreateTest(TestContext.CurrentContext.Test.Name);
 
             channelPage.GoTo(Browser.AppConfig.RMSBaseUrl);
             channelPage.ChooseAndClick(BaseTestData.USERNAME_PASSWORD_LOGIN);
@@ -76,7 +76,7 @@ namespace RMSUI.Test.Tests
         [TearDown]
         public void Destroy()
         {
-            /*
+            
             var status = TestContext.CurrentContext.Result.Outcome.Status;
             var stacktrace = string.IsNullOrEmpty(TestContext.CurrentContext.Result.StackTrace)
                     ? ""
@@ -89,7 +89,7 @@ namespace RMSUI.Test.Tests
                     logstatus = Status.Fail;
                     DateTime time = DateTime.Now;
                     String fileName = "Screenshot_" + time.ToString("HHmmss") + ".png";
-                    String screenShotPath = Capture(Browser.Driver, fileName);
+                    Capture(Browser.Driver, fileName);
                     _test.Log(Status.Fail, "Fail");
                     _test.Log(Status.Fail, "Snapshot below: " + _test.AddScreenCaptureFromPath($@"Screenshots\{fileName}"));
                     break;
@@ -104,27 +104,27 @@ namespace RMSUI.Test.Tests
                     break;
             }
 
-            _test.Log(logstatus, "Test ended with " + logstatus + stacktrace);
-            */
+            _test.Log(logstatus, $"Test ended with {logstatus} {stacktrace}");
+            
             Browser.Destroy();
         }
 
-        /*
+        
         [OneTimeTearDown]
         protected void TearDown()
         {
             _extent.Flush();
         }
 
-        private string Capture(IWebDriver driver, String screenShotName)
+        private void Capture(IWebDriver driver, String screenShotName)
         {
             ITakesScreenshot ts = (ITakesScreenshot)driver;
             Screenshot screenshot = ts.GetScreenshot();
             var screenshotPath = $@"{_projectPath}\Screenshots\{screenShotName}";
             var localpath = new Uri(screenshotPath).LocalPath;
             screenshot.SaveAsFile(localpath, ScreenshotImageFormat.Png);
-            return _projectPath;
+            //return _projectPath;
         }
-        */
+        
     }
 }

@@ -1,11 +1,22 @@
 [
   {
-    "CoachNo": "0CC0003",
-    "ClassType": "Group",
-    "Skill": "TOT LEVEL 1",
-    "Languages": [
-      "Cantonese",
-      "English"
-    ]
+    "ClassInfo": {
+      "CoachNo": "0CC0003",
+      "ClassType": "Group",
+      "Skill": "TOT LEVEL 1",
+      "Languages": [
+        "Cantonese",
+        "English"
+      ],
+      "TargetLessonCSSs": [
+        ".dx-scheduler-date-table tr:nth-child(5) td:nth-child({0})"
+      ]
+    },
+    "ValidateLesson": {
+      "TimeslotCss": ".dx-scheduler-date-table tr:nth-child(5) td:nth-child({0})",
+      "TargetDateslotCss": ".dx-scheduler-date-table tr:nth-child(5) td:nth-child({0}) div.cell-with-classes",
+      "LessonTimeSlotCss": "#lessonTimeslotList > .timeslot-item > p[innerText='{0}'])",
+      "CoachNo": "0CC0003"
+    }
   }
 ]
