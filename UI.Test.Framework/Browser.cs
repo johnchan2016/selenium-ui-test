@@ -5,6 +5,7 @@ using OpenQA.Selenium.Support.Extensions;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Text;
 using UI.Test.Framework.Helpers;
@@ -59,13 +60,6 @@ namespace UI.Test.Framework
         {
             Driver.Navigate().GoToUrl(url);
             WaitForPageLoaded();
-        }
-
-        public static void ImplicitWait(int overridenWaitTime = -1)
-        {
-            int waitTime = overridenWaitTime == -1 ? _waitTimeout : overridenWaitTime;
-
-            Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(overridenWaitTime);
         }
 
         public static void WaitForPageLoaded(int overrideWaitTime = -1)
@@ -177,16 +171,6 @@ namespace UI.Test.Framework
             actions.SendKeys(keyName).Perform();
         }
 
-        public static string GetText(this By by)
-        {
-            WaitForElementVisible(by);
-
-            var element = Driver.FindElement(by);
-
-            Debug.WriteLine($"GetText: {element.Text}");
-            return element.Text;
-        }
-
         public static void ScrollTo(this By by)
         {
             WaitForElementVisible(by);
@@ -229,6 +213,22 @@ namespace UI.Test.Framework
             var targetElm = Driver.FindElement(target);
             var actions = new Actions(Driver);
             actions.DragAndDrop(sourceElm, targetElm).Build().Perform();
+        }
+
+        public static ReadOnlyCollection<IWebElement> GetWebElements(this By by, int overridenWaitTime = -1)
+        {
+            try
+            {
+                int waitTime = overridenWaitTime == -1 ? _waitTimeout : overridenWaitTime;
+
+                WaitForElementVisible(by, waitTime);
+
+                return Driver.FindElements(by);
+            }
+            catch(Exception ex)
+            {
+                return new List<IWebElement>().AsReadOnly();
+            }
         }
 
         public static void Destroy()

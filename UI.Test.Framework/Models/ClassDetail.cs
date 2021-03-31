@@ -26,9 +26,7 @@ namespace UI.Test.Framework.Models
 
     public class ValidateLesson
     {
-        public string TimeslotCss { get; set; }
-        public string TargetDateslotCss { get; set; }
-        public string LessonTimeSlotCss { get; set; }
-        public string CoachNo { get; set; }
+        public string TargetTimeslotXPath { get; set; }
+        public string ClassListXPath { get; set; }
     }
 }

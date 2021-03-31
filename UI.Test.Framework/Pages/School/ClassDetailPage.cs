@@ -25,37 +25,24 @@ namespace UI.Test.Framework.Pages.School
             return classDetailDiv.IsDisplay();
         }
 
-        public bool HasLessonCreated()
+        public bool IsLessonExist()
         {
-            return classLessonScheduleComponent.HasLessonsCreated();
+            return classLessonScheduleComponent.IsLessonExist();
         }
 
         public void CreateNewLessons(List<string> targetLessonCSSs)
         {
-            foreach(var target in targetLessonCSSs)
-            {
-                var targetCSS = string.Format(target, (int)DateTime.Now.DayOfWeek + 1);
-                classLessonScheduleComponent.CreateNewLesson(targetCSS);
-            }
-
-            classLessonScheduleComponent.SaveChange();
+            classLessonScheduleComponent.CreateNewLessons(targetLessonCSSs);
         }
 
-        public void DeleteAllLessons(string targetLessonCSSs)
+        public void DeleteAllLessons()
         {
-            int lessonCount = 0;
-            for(int i = 1; i <= lessonCount; i++)
-            {
+            classLessonScheduleComponent.DeleteAllLessons();
+        }
 
-            }
-
-            //foreach (var target in targetLessonCSSs)
-            //{
-            //    var targetCSS = string.Format(target, DateTime.Now.DayOfWeek + 1);
-            //    classLessonScheduleComponent.CreateNewLesson(targetCSS);
-            //}
-
-            classLessonScheduleComponent.SaveChange();
+        public bool HasNewLessonsCreated()
+        {
+            return classLessonScheduleComponent.IsLessonCreatedSuccess();
         }
     }
 }

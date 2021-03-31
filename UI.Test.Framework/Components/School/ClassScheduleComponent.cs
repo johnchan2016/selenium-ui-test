@@ -7,17 +7,15 @@ using UI.Test.Framework.Models;
 
 namespace UI.Test.Framework.Components.School
 {
-    public class ClassScheduleComponent
+    public class ClassScheduleComponent : BaseComponent
     {
         By lessonTimeSlotCssBy = null;
 
-        public bool HasLesson(ValidateLesson validateLesson)
+        public bool HasLesson(ClassDetail classDetail)
         {
-            string timeslot_css = string.Format(validateLesson.TimeslotCss, (int)DateTime.Now.DayOfWeek + 1);
-            string targetDateslot_css = string.Format(validateLesson.TargetDateslotCss, (int)DateTime.Now.DayOfWeek + 1);
+            string timeslot_xpath = string.Format(classDetail.ValidateLesson.TargetTimeslotXPath, (int)DateTime.Now.DayOfWeek + 1);
 
-            By timeslot = By.CssSelector(timeslot_css);
-            By targetTimeslot = By.CssSelector(targetDateslot_css);
+            By timeslot = By.XPath(timeslot_xpath);
 
             var isShown = timeslot.IsDisplay(10);
 
@@ -25,23 +23,14 @@ namespace UI.Test.Framework.Components.School
 
             if (isShown)
             {
-                var hasLesson = targetTimeslot.IsDisplay(8);
+                timeslot.SafeClick();
 
-                Debug.WriteLine($"hasLesson: {hasLesson}");
+                string lessonTimeSlotXPath = string.Format(classDetail.ValidateLesson.ClassListXPath, classDetail.ClassInfo.CoachNo);
+                lessonTimeSlotCssBy = By.XPath(lessonTimeSlotXPath);
 
-                if (hasLesson)
-                {
-                    targetTimeslot.SafeClick();
+                var hasCoachLesson = lessonTimeSlotCssBy.IsDisplay(10);
 
-                    string lessonTimeSlotCss = string.Format(validateLesson.LessonTimeSlotCss, validateLesson.CoachNo);
-                    lessonTimeSlotCssBy = By.CssSelector(lessonTimeSlotCss);
-
-                    var hasCoachLesson = lessonTimeSlotCssBy.HasElement(10);
-
-                    return hasCoachLesson;
-                } 
-
-                return hasLesson;
+                return hasCoachLesson;
             }
 
             return isShown;

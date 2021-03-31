@@ -121,6 +121,9 @@ namespace RMSUI.Test.Tests
             ITakesScreenshot ts = (ITakesScreenshot)driver;
             Screenshot screenshot = ts.GetScreenshot();
             var screenshotPath = $@"{_projectPath}\Screenshots\{screenShotName}";
+
+            if (!Directory.Exists(screenshotPath)) Directory.CreateDirectory(screenshotPath);
+
             var localpath = new Uri(screenshotPath).LocalPath;
             screenshot.SaveAsFile(localpath, ScreenshotImageFormat.Png);
             //return _projectPath;

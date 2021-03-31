@@ -36,48 +36,57 @@ namespace RMSUI.Test.Tests.School
         //    Assert.AreEqual(hasCreated, validateLesson.Expected);
         //}
 
+        /// <summary>Create_Class_With_Lesson
+        /// 1. go to class maintenance page
+        /// 2. check any lessons on specific timeslot
+        /// 3a. if yes, skip create class ## end
+        /// 3b. if no, create class, continue with step 4
+        /// 4. create lessons - check whether the lesson is created
+        /// a. if yes, remove
+        /// b. if no, create new lessons
+        /// ## end
+        /// </summary>
         [TestCaseSource("ClassDetailData")]
         public void Create_Class_With_Lesson(ClassDetail classDetail)
         {
-            // 1. go to class maintenance page
-            // 2. check any lessons on specific timeslot
-            // 3a. if yes, skip create class ## end
-            // 3b. if no, create class, continue with step 4
-            // 4. create lessons - check whether the lesson is created
-                // a. if yes, remove
-                // b. if no, create new lessons
-            // ## end
-
-            bool isFinished = false;
+            bool hasNewLessonCreated = false;
             classMaintenancePage.ClickTargetMenu(classMaintenancePage.TargetMenuItem);
 
-            var hasCreated = classMaintenancePage.ClassScheduleComponent.HasLesson(classDetail.ValidateLesson);
+            var hasCreated = classMaintenancePage.ClassScheduleComponent.HasLesson(classDetail);
+            Debug.WriteLine($"hasCreated: {hasCreated}");
+
             // click detail or create new class
             if (hasCreated)
             {
-                //classMaintenancePage.ClassScheduleComponent.ClickTargetLessonTimeslot();
+                classMaintenancePage.ClassScheduleComponent.ClickTargetLessonTimeslot();
             }
             else
             {
                 classMaintenancePage.ClassListingComponent.CreateClass(classDetail.ClassInfo);
             }
 
-            //
             var isClassDetailPage = classDetailPage.IsClassDetailPage();
             if (isClassDetailPage)
             {
                 //delete all existing lessons
-                
+                var IsLessonExist = classDetailPage.IsLessonExist();
+
+                Debug.WriteLine($"IsLessonExist: {IsLessonExist}");
+
+                if (IsLessonExist)
+                {
+                    classDetailPage.DeleteAllLessons();
+                }
 
                 //create new lessons
                 classDetailPage.CreateNewLessons(classDetail.ClassInfo.TargetLessonCSSs);
 
-                isFinished = classDetailPage.HasLessonCreated();
-                Debug.WriteLine($"isFinished: {isFinished}");
+                hasNewLessonCreated = classDetailPage.HasNewLessonsCreated();
+                Debug.WriteLine($"hasNewLessonCreated: {hasNewLessonCreated}");
             }
 
             //assert
-            Assert.IsTrue(isFinished);
+            Assert.IsTrue(hasNewLessonCreated);
         }
 
         // DataSource

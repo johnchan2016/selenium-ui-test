@@ -13,10 +13,8 @@
       ]
     },
     "ValidateLesson": {
-      "TimeslotCss": ".dx-scheduler-date-table tr:nth-child(5) td:nth-child({0})",
-      "TargetDateslotCss": ".dx-scheduler-date-table tr:nth-child(5) td:nth-child({0}) div.cell-with-classes",
-      "LessonTimeSlotCss": "#lessonTimeslotList > .timeslot-item > p[innerText='{0}'])",
-      "CoachNo": "0CC0003"
+      "TargetTimeslotXPath": "//*[@id='lesson-scheduler']//table[@class='dx-scheduler-date-table']//tr[5]/td[{0}]",
+      "ClassListXPath": "//*[@id='coachNo-line' and contains(text(), '{0}')]"
     }
   }
 ]
