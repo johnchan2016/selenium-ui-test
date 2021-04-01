@@ -81,7 +81,10 @@ namespace UI.Test.Framework
             public const string CANCEL_SCHEDULE_BUTTON_ID = "cancelScheduleBtn";
             public const string REFRESH_SCHEDULE_BUTTON_ID = "refreshScheduleBtn";
             public const string MAIN_COACH_XPATH = "//div[@id='coach1']";
-            public const string FIRST_LESSON_XPATH = "//div[@id='lesson1']";
+            public const string FIRST_SUCCESS_LESSON_XPATH = "//div[@id='lesson1' and contains(@style,'background: {0}')]";
+            public const string LESSON_ITEM_LIST_XPATH = "//*[@id='lessonList']/dx-draggable";
+            public const string REMOVE_LESSON_BUTTON_XPATH = "//*[@id='removeLessonBtn']";
+
         }
 
         public class LessonAppoinmentComponent

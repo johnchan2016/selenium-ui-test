@@ -15,12 +15,10 @@ namespace UI.Test.Framework.Components.School
         By cancelButton => By.Id(FrameworkConstants.ClassLessonScheduleComponent.CANCEL_SCHEDULE_BUTTON_ID);
         By editButton => By.Id(FrameworkConstants.ClassLessonScheduleComponent.EDIT_SCHEDULE_BUTTON_ID);
         By refreshButton => By.Id(FrameworkConstants.ClassLessonScheduleComponent.REFRESH_SCHEDULE_BUTTON_ID);
-        //By coachList => By.Id("coachList");
         By mainCoach => By.XPath(FrameworkConstants.ClassLessonScheduleComponent.MAIN_COACH_XPATH);
-        //By lessonList => By.Id("lessonList");
-        By firstSuccessLesson => By.XPath($"//div[@id='lesson1' and contains(@style,'background: {successLessonBackgroundColor}')]");
-        By lessonItemList => By.XPath("//*[@id='lessonList']/dx-draggable");
-        By removeLessonButton => By.XPath("//*[@id='removeLessonBtn']");
+        By firstSuccessLesson => By.XPath(string.Format(FrameworkConstants.ClassLessonScheduleComponent.FIRST_SUCCESS_LESSON_XPATH, successLessonBackgroundColor));
+        By lessonItemList => By.XPath(FrameworkConstants.ClassLessonScheduleComponent.LESSON_ITEM_LIST_XPATH);
+        By removeLessonButton => By.XPath(FrameworkConstants.ClassLessonScheduleComponent.REMOVE_LESSON_BUTTON_XPATH);
 
         LessonAppointmentComponent lessonAppointmentComponent;
 

@@ -32,9 +32,10 @@ namespace RMSUI.Test.Tests
             loginPage = new LoginPage();
 
             string dateformat_yyyyMMdd = DateTime.Now.ToString("yyyyMMdd");
+            string dateformat_24hhmmss = DateTime.Now.ToString("HHmmss");
             _path = Assembly.GetCallingAssembly().CodeBase;
             _actualPath = _path.Substring(0, _path.LastIndexOf("bin"));
-            _projectPath = $@"{new Uri(_actualPath).LocalPath}\Reports\{dateformat_yyyyMMdd}";
+            _projectPath = $@"{new Uri(_actualPath).LocalPath}\TestReports\{dateformat_yyyyMMdd}\{dateformat_24hhmmss}";
         }
 
         
@@ -87,11 +88,10 @@ namespace RMSUI.Test.Tests
             {
                 case TestStatus.Failed:
                     logstatus = Status.Fail;
-                    DateTime time = DateTime.Now;
-                    String fileName = "Screenshot_" + time.ToString("HHmmss") + ".png";
+                    String fileName = "Screenshot_" + DateTime.Now.ToString("HHmmss") + ".png";
                     Capture(Browser.Driver, fileName);
                     _test.Log(Status.Fail, "Fail");
-                    _test.Log(Status.Fail, "Snapshot below: " + _test.AddScreenCaptureFromPath($@"Screenshots\{fileName}"));
+                    _test.Log(Status.Fail, "Snapshot below: " + _test.AddScreenCaptureFromPath($@"{_projectPath}\Screenshots\{fileName}"));
                     break;
                 case TestStatus.Inconclusive:
                     logstatus = Status.Warning;
@@ -108,7 +108,6 @@ namespace RMSUI.Test.Tests
             
             Browser.Destroy();
         }
-
         
         [OneTimeTearDown]
         protected void TearDown()
@@ -120,9 +119,10 @@ namespace RMSUI.Test.Tests
         {
             ITakesScreenshot ts = (ITakesScreenshot)driver;
             Screenshot screenshot = ts.GetScreenshot();
+            var screenshotFolderPath = $@"{_projectPath}\Screenshots";
             var screenshotPath = $@"{_projectPath}\Screenshots\{screenShotName}";
 
-            if (!Directory.Exists(screenshotPath)) Directory.CreateDirectory(screenshotPath);
+            if (!Directory.Exists(screenshotFolderPath)) Directory.CreateDirectory(screenshotFolderPath);
 
             var localpath = new Uri(screenshotPath).LocalPath;
             screenshot.SaveAsFile(localpath, ScreenshotImageFormat.Png);
