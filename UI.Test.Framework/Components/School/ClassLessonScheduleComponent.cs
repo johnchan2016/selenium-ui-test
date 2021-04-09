@@ -31,6 +31,7 @@ namespace UI.Test.Framework.Components.School
 
         public void CreateNewLessons(List<string> targetLessonCSSs)
         {
+            Thread.Sleep(1000);
             var isEnabled = editButton.IsEnabled(5);
 
             Debug.WriteLine($"CreateNewLessons/isEnabled: {isEnabled}");

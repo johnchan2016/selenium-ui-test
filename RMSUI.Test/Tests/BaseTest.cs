@@ -11,6 +11,7 @@ using System.IO;
 using System.Reflection;
 using OpenQA.Selenium;
 using NUnit.Framework.Interfaces;
+using System.Diagnostics;
 
 namespace RMSUI.Test.Tests
 {
@@ -33,7 +34,10 @@ namespace RMSUI.Test.Tests
 
             string dateformat_yyyyMMdd = DateTime.Now.ToString("yyyyMMdd");
             string dateformat_24hhmmss = DateTime.Now.ToString("HHmmss");
-            _path = Assembly.GetCallingAssembly().CodeBase;
+            _path = AppDomain.CurrentDomain.BaseDirectory;
+
+            Debug.WriteLine($"path: {_path}");
+
             _actualPath = _path.Substring(0, _path.LastIndexOf("bin"));
             _projectPath = $@"{new Uri(_actualPath).LocalPath}\TestReports\{dateformat_yyyyMMdd}\{dateformat_24hhmmss}";
         }

@@ -30,6 +30,8 @@ namespace UI.Test.Framework.Components.School
 
                 var hasCoachLesson = lessonTimeSlotCssBy.IsDisplay(10);
 
+                Debug.WriteLine($"hasCoachLesson: {hasCoachLesson}");
+
                 return hasCoachLesson;
             }
 
