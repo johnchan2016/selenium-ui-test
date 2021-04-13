@@ -16,7 +16,7 @@ namespace UI.Test.Framework.Pages
 
         public BasePage()
         {
-            rmsMenuItems = FileHelper.LoadJsonToList<RmsMenuItem>(@"RmsMenuItem.json");
+            rmsMenuItems = FileHelper.LoadJsonToList<RmsMenuItem>($@"{AppDomain.CurrentDomain.BaseDirectory}\RmsMenuItem.json");
         }
 
         public string Path => path;

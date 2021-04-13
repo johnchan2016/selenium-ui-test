@@ -25,7 +25,7 @@ namespace UI.Test.Framework
             {
                 if (_driver == null)
                 {
-                    _config = FileHelper.LoadJson<AppConfig>(@"appsettings.json");
+                    _config = FileHelper.LoadJson<AppConfig>($@"{AppDomain.CurrentDomain.BaseDirectory}\appsettings.json");
                     _waitTimeout = _config.WaitForTimeout;
 
                     switch (_config.BrowserType)
@@ -50,7 +50,7 @@ namespace UI.Test.Framework
         public static AppConfig AppConfig
         {
             get { 
-                if (_config == null) _config = FileHelper.LoadJson<AppConfig>(@"appsettings.json");
+                if (_config == null) _config = FileHelper.LoadJson<AppConfig>($@"{AppDomain.CurrentDomain.BaseDirectory}\appsettings.json");
                 return _config;
             }
             set { _config = value; }
